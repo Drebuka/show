@@ -9,8 +9,16 @@
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <title>Elmina</title>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23292019'/%3E%3Cpath d='M6 24h20v2H6zM8 14h3v-3h2v3h2v-5h2v5h2v-3h2v3h3v10H8z' fill='%23eae1d1'/%3E%3C/svg%3E" />
-    <script type="module" crossorigin src="./assets/index-DXrFrRFg.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-6DeRyMyU.css">
+    <!-- Start the two things a visitor waits for as early as possible: the
+         picture shown while the 3D model loads, and the model file itself. The
+         model is fetched here in parallel with the scripts instead of after them. -->
+    <link rel="preload" as="image" href="./assets/elmina-poster-phone.webp" type="image/webp" media="(max-width: 599px)" fetchpriority="high" />
+    <link rel="preload" as="image" href="./assets/elmina-poster-desktop.webp" type="image/webp" media="(min-width: 600px)" fetchpriority="high" />
+    <link rel="preload" as="fetch" href="./models/elmina-castle.glb" type="model/gltf-binary" crossorigin />
+    <script type="module" crossorigin src="./assets/index-B6Ok2oHE.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-ClqoFmYp.css">
+    <link rel="modulepreload" crossorigin href="./assets/viewer-Dv68pSpo.js">
+    <link rel="modulepreload" crossorigin href="./assets/experience-CnUdBRjX.js">
   </head>
   <body>
     <a class="skip-link" href="#story">Skip to story layers</a>
@@ -56,8 +64,13 @@
             <!-- Suppress model-viewer's default AR button; the page provides its own labelled button. -->
             <span slot="ar-button" hidden></span>
 
+            <!-- A still picture of the model, shown at once. The interactive
+                 model fades in over it at the same position and size. -->
             <div slot="poster" class="viewer-poster" aria-hidden="true">
-              <span>Preparing the model</span>
+              <picture>
+                <source media="(max-width: 599px)" srcset="assets/elmina-poster-phone.webp" type="image/webp" />
+                <img src="./assets/elmina-poster-desktop.webp" alt="" decoding="async" fetchpriority="high" />
+              </picture>
             </div>
 
             <div slot="progress-bar" class="viewer-progress" aria-hidden="true"><span></span></div>
@@ -91,6 +104,7 @@
 
           <div class="stage__foot">
             <div class="stage__tools">
+              <span class="viewer-loading" id="viewer-loading" role="status">Loading the 3D model…</span>
               <span class="viewer-hint">Drag to orbit · scroll or pinch to zoom</span>
               <button type="button" class="text-button" id="reset-view">Reset view</button>
               <button type="button" class="text-button" id="reset-scale">Reset scale</button>
