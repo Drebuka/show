@@ -3,8 +3,10 @@
 - `elmina-castle.glb` — **the reconstruction**, exported from the Blender master
   by `blender/scripts/bake_and_export.py`. Interpretive reconstruction based on
   authorised reference material; not survey data. Metres, +Y up, 1.5 m on its
-  longest side (about 1:145), base at y = 0, entrance side facing +Z.
-- `textures/elmina-*-detail.jpg` — the model's full-resolution textures. The GLB
+  longest side (about 1:177), base at y = 0, entrance side facing +Z.
+- `elmina-castle.web.glb` — the compact copy the page loads (Meshopt compression),
+  made from `elmina-castle.glb` by `npm run compress:model`.
+- `textures/elmina-*-detail.webp` — the model's full-resolution textures. The GLB
   holds light copies so it loads quickly; the page swaps these in afterwards.
 - `elmina-castle.anchors.json` — label positions for the reconstruction (generated).
 - `elmina-castle.usdz` — the same model exported for iOS Quick Look. Not used
