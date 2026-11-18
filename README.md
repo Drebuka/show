@@ -1,4 +1,4 @@
-# Elmina: Coast, Castle, Memory
+# Elmina
 
 The published website for a browser-based AR exhibition piece. Visitors open it
 from a QR code, explore a 3D model of Elmina Castle, and place it in their own
