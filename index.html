@@ -9,8 +9,8 @@
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <title>Elmina</title>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230b2540'/%3E%3Cpath d='M6 24h20v2H6zM8 14h3v-3h2v3h2v-5h2v5h2v-3h2v3h3v10H8z' fill='%23d9cdb4'/%3E%3C/svg%3E" />
-    <script type="module" crossorigin src="./assets/index-BnEvToVc.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index--VuJnsK8.css">
+    <script type="module" crossorigin src="./assets/index-BxVqQCMA.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-DnH9yckx.css">
   </head>
   <body>
     <a class="skip-link" href="#story">Skip to story layers</a>
@@ -117,19 +117,26 @@
         </section>
       </main>
 
-      <footer class="sources" id="sources" aria-labelledby="sources-heading">
-        <h2 id="sources-heading">Sources &amp; acknowledgement</h2>
-        <p class="sources__ack" id="acknowledgement"></p>
-        <div class="sources__groups" id="source-groups"></div>
-        <details class="sources__more" open>
-          <summary>Model references: GIS layouts, rendered views, drawings</summary>
-          <p class="sources__note" id="model-reference-note"></p>
-          <div class="sources__groups" id="documentation-groups"></div>
+      <footer class="sources" id="sources">
+        <!-- Sources and acknowledgement, tucked behind one small button. -->
+        <details class="ack" id="acknowledgement-panel">
+          <summary class="ack__button">
+            <span class="ack__label-closed">Acknowledgement</span>
+            <span class="ack__label-open">Hide acknowledgement</span>
+          </summary>
+          <div class="ack__content">
+            <h2 id="sources-heading">Sources &amp; acknowledgement</h2>
+            <p class="sources__ack" id="acknowledgement"></p>
+            <div class="sources__groups" id="source-groups"></div>
+            <h3 class="sources__subhead">Model references: GIS layouts, rendered views, drawings</h3>
+            <p class="sources__note" id="model-reference-note"></p>
+            <div class="sources__groups" id="documentation-groups"></div>
+            <p class="sources__privacy">
+              This page collects no data: no analytics, accounts, sign-in or cookies. AR placement lasts only
+              for the current session; the model is not stored in your space after you leave AR.
+            </p>
+          </div>
         </details>
-        <p class="sources__privacy">
-          This page collects no data: no analytics, accounts, sign-in or cookies. AR placement lasts only
-          for the current session; the model is not stored in your space after you leave AR.
-        </p>
       </footer>
     </div>
   </body>
