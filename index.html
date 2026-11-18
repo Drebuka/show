@@ -12,25 +12,28 @@
     <!-- The model file is the thing a visitor waits for. Fetch it from the very
          start, in parallel with the scripts, instead of after them. -->
     <link rel="preload" as="fetch" href="./models/elmina-castle.glb" type="model/gltf-binary" crossorigin />
-    <script type="module" crossorigin src="./assets/index-CKk6Vukm.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-C89mwG4U.css">
+    <script type="module" crossorigin src="./assets/index-BjowtbOz.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-DO_a2KJQ.css">
     <link rel="modulepreload" crossorigin href="./assets/viewer-Dv68pSpo.js">
-    <link rel="modulepreload" crossorigin href="./assets/experience-CebtDF9L.js">
+    <link rel="modulepreload" crossorigin href="./assets/experience-CssmnDRb.js">
   </head>
   <body>
     <a class="skip-link" href="#story">Skip to story layers</a>
 
     <div class="page">
       <header class="bar">
-        <p class="bar__mark">Exhibition prototype</p>
-        <button type="button" class="plain" id="ack-open" aria-haspopup="dialog" aria-controls="acknowledgement-panel">
+        <p class="label">Exhibition prototype</p>
+        <p class="label bar__meta">Elmina, Ghana · Gulf of Guinea</p>
+        <button type="button" class="text-button" id="ack-open" aria-haspopup="dialog" aria-controls="acknowledgement-panel">
           Acknowledgement
         </button>
       </header>
 
-      <main class="layout" id="layout">
-        <h1>Elmina</h1>
-        <p class="subtitle">Place a spatial study of Elmina Castle in your surroundings.</p>
+      <main class="layout">
+        <div class="intro">
+          <h1>Elmina</h1>
+          <p class="subtitle">Place a spatial study of Elmina Castle in your surroundings.</p>
+        </div>
 
         <section class="stage" aria-label="Interactive 3D view of the reconstruction">
           <model-viewer
@@ -89,7 +92,7 @@
             </div>
 
             <button type="button" slot="exit-webxr-ar-button" class="ar-return">
-              <span class="ar-return__icon" aria-hidden="true">←</span><span>Return to story</span>
+              <span aria-hidden="true">←</span> Return to story
             </button>
           </model-viewer>
 
@@ -97,16 +100,14 @@
             The 3D view could not be shown on this device. The story layers and sources remain available on this page.
           </p>
 
-          <div class="stage__tools">
-            <span class="viewer-hint">Drag to turn - scroll or pinch to zoom</span>
-            <button type="button" class="plain" id="reset-view">Reset view</button>
-            <span class="dash" aria-hidden="true">-</span>
-            <button type="button" class="plain" id="reset-scale">Reset scale</button>
+          <div class="stage__foot">
+            <div class="stage__tools">
+              <span class="viewer-hint">Drag to orbit · scroll or pinch to zoom</span>
+              <button type="button" class="text-button" id="reset-view">Reset view</button>
+              <button type="button" class="text-button" id="reset-scale">Reset scale</button>
+            </div>
           </div>
         </section>
-
-        <!-- Set vertically beside the model; names the open story layer. Decorative. -->
-        <p class="stage-label" id="stage-label" aria-hidden="true">Gulf of Guinea</p>
 
         <section class="place" aria-label="Place the model in your space">
           <fieldset class="sizes" id="scale-modes">
@@ -124,10 +125,6 @@
         <section class="story" id="story" aria-labelledby="story-heading" tabindex="-1">
           <h2 class="label" id="story-heading">Story layers</h2>
           <ol class="index" id="story-buttons"></ol>
-          <div class="index__panel" id="story-panel" role="region" aria-live="polite" aria-labelledby="story-panel-title" hidden>
-            <h3 class="index__panel-title" id="story-panel-title"></h3>
-            <p id="story-panel-body"></p>
-          </div>
         </section>
       </main>
     </div>
@@ -136,7 +133,7 @@
     <dialog class="sheet" id="acknowledgement-panel" aria-labelledby="sources-heading">
       <div class="sheet__head">
         <p class="label">Acknowledgement</p>
-        <button type="button" class="round" id="ack-close" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <button type="button" class="text-button" id="ack-close">Close</button>
       </div>
       <div class="sheet__body" id="sources">
         <h2 id="sources-heading">Sources &amp; acknowledgement</h2>
