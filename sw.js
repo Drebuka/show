@@ -6,12 +6,14 @@
  *   assets/…             cache first. These files have a fingerprint in their
  *                        name, so a changed file always has a new name.
  *   models/…             the saved copy is shown at once and refreshed in the
- *                        background for next time (their names do not change
- *                        when the model is re-exported).
+ *                        background for next time. The page asks for the model,
+ *                        its textures and its labels with a `?v=` code that
+ *                        changes when the model is re-exported, so a saved copy
+ *                        of an older model is never mixed with newer files.
  *
  * Bump VERSION to throw every saved copy away.
  */
-const VERSION = 'elmina-v1';
+const VERSION = 'elmina-v2';
 
 self.addEventListener('install', () => self.skipWaiting());
 
