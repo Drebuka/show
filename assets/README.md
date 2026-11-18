@@ -1,0 +1,118 @@
+# Assets guide — Elmina: Coast, Castle, Memory
+
+This folder (and `public/models/`) holds every file the exhibition page serves.
+The site works **without any externally sourced image or model file**: the model
+it ships is the project's own Blender reconstruction, an interpretive
+reconstruction based on authorised reference material.
+
+## Rules
+
+- **Never scrape, hotlink, download, extract or bypass restrictions** on Zamani
+  Project, Sketchfab or YouTube assets. The page only *links* to them
+  (`src/content/sourceReferences.ts`).
+- Add a file here only when the project owner holds **written authorisation**
+  to use it in this exhibition, and record the credit (see below).
+- No analytics, trackers, remote fonts or third-party embeds.
+
+## Folder layout
+
+```
+web-ar/public/
+├── models/
+│   ├── elmina-castle.glb             the Blender reconstruction (exported, do not edit by hand)
+│   ├── elmina-castle.anchors.json    label positions for the reconstruction (exported)
+│   ├── elmina-castle.usdz            iOS Quick Look export (optional, off by default)
+│   ├── elmina-massing.glb            small generated fallback
+│   └── elmina-massing.anchors.json   label positions for the fallback
+└── assets/
+    ├── README.md                     this guide
+    └── images/                       FUTURE: authorised images, maps, plans, photographs
+```
+
+The page loads `models/elmina-castle.glb`. If it is missing, the fallback
+massing is shown so the page still works.
+
+## Naming
+
+Lowercase, hyphen-separated, descriptive, with the source and a version or
+year where useful:
+
+| Kind | Pattern | Example |
+| --- | --- | --- |
+| Survey model | `elmina-castle.glb` | (fixed name, see above) |
+| iOS model | `elmina-castle.usdz` | (fixed name) |
+| Photograph | `photo-<subject>-<source>-<year>.jpg` | `photo-seaward-bastion-zamani-2019.jpg` |
+| Plan / section | `plan-<name>-<source>.png` | `section-b2-zamani.png` |
+| GIS / map | `gis-<name>-<source>.png` | `gis-layout-1-zamani.png` |
+
+Keep a plain-text `CREDITS.md` beside the images listing, for each file: title,
+creator, source collection, licence or permission reference, date received and
+the exact credit line to display.
+
+## Attribution
+
+Display credit exactly as the rights holder requests. Default wording, used on
+the page (`src/content/sourceReferences.ts → acknowledgement`):
+
+> Interpretive reconstruction based on authorised reference material. Spatial
+> documentation of Elmina Castle: The Zamani Project. Heritage context: UNESCO
+> World Heritage Centre. The 3D model was built in Blender for this exhibition
+> by studying the Zamani Project's published plans, GIS layouts, elevations,
+> section, rendered model views and panorama tour. It is an estimate, not a
+> surveyed digital twin: it contains no Zamani Project scan data, and no
+> external images, video or models are embedded on this page.
+
+The reference material itself is **not** stored in this repository. It was
+viewed in a browser to build the model and is credited by link. To display any
+of it on the page, add authorised copies to `images/` and record them in
+`CREDITS.md`.
+
+## Optimising a replacement model (for example a future survey model)
+
+Target for a smooth phone AR session loaded from a QR code:
+
+| Property | Target |
+| --- | --- |
+| Format | glTF 2.0 binary (`.glb`) |
+| Triangles | roughly **50k–150k** |
+| Textures | **1K–2K**, compressed (KTX2/Basis, or WebP/JPEG) |
+| File size | below approximately **15 MB** |
+| Units | **metres** |
+| Orientation | +Y up; the side visitors should see first faces +Z |
+| Ground | base of the model at **y = 0**, centred on the origin in X and Z |
+| Materials | PBR metallic-roughness; avoid transparency and very glossy materials |
+
+Example pipeline with the open-source [glTF-Transform CLI](https://gltf-transform.dev/)
+(run on your own machine against the authorised source file):
+
+```bash
+npx @gltf-transform/cli inspect source.glb
+npx @gltf-transform/cli simplify source.glb step1.glb --ratio 0.25 --error 0.001
+npx @gltf-transform/cli resize step1.glb step2.glb --width 2048 --height 2048
+npx @gltf-transform/cli etc1s step2.glb step3.glb
+npx @gltf-transform/cli meshopt step3.glb public/models/elmina-castle.glb
+```
+
+Scale and position (metres, base at y = 0) are best fixed in Blender or the
+survey software before export. The scale modes (Table ≈ 0.6 m, Room ≈ 1.5 m,
+Walk around ≈ 3 m) are computed from the model's real bounding box, so any
+correctly normalised model starts at the right size.
+
+**Decoders:** a model compressed with Draco, Meshopt or KTX2 makes model-viewer
+fetch the matching decoder from Google's CDN (`www.gstatic.com`) by default. To
+keep the exhibition fully self-hosted, copy the decoders from
+`node_modules/three/examples/jsm/libs/` into `public/decoders/` and set
+`ModelViewerElement.dracoDecoderLocation`, `.ktx2TranscoderLocation` and
+`.meshoptDecoderLocation` in `src/components/viewer.ts`.
+
+**Hotspots:** the labels (Great Court, Inner Court, Service Yard, the
+bastions, French Battery, Gate tower, Bridge and ditches, Rock shoreline) are
+positioned by `elmina-castle.anchors.json`, exported from the Blender file. A
+replacement model needs its own anchors file in the same format, or none.
+
+## USDZ (iPhone / iPad)
+
+`models/elmina-castle.usdz` is exported from Blender with the GLB. By default
+the page does not use it: model-viewer generates the Quick Look file from the
+GLB on the device so the chosen starting size applies. See section 7 of
+`web-ar/README.md` for how to switch to the authored USDZ after device testing.

@@ -1,0 +1,5 @@
+# Content types for 3D models (read by Netlify and Cloudflare Pages).
+/models/*.glb
+  Content-Type: model/gltf-binary
+/models/*.usdz
+  Content-Type: model/vnd.usdz+zip

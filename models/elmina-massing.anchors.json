@@ -1,0 +1,102 @@
+{
+  "note": "Hotspot anchors for the interpretive massing only. Regenerate with scripts/generate-elmina-massing-model.mjs. A replacement model should ship its own <model-name>.anchors.json or none.",
+  "units": "metres",
+  "anchors": {
+    "greatCourt": {
+      "position": [
+        0.06501,
+        0.05919,
+        -0.0791
+      ],
+      "normal": [
+        0,
+        1,
+        0
+      ]
+    },
+    "innerCourt": {
+      "position": [
+        -0.22194,
+        0.13241,
+        -0.0324
+      ],
+      "normal": [
+        0,
+        1,
+        0
+      ]
+    },
+    "serviceYard": {
+      "position": [
+        -0.54625,
+        0.04128,
+        0.00156
+      ],
+      "normal": [
+        0,
+        1,
+        0
+      ]
+    },
+    "westBastion": {
+      "position": [
+        -0.35099,
+        0.0958,
+        0.1306
+      ],
+      "normal": [
+        0,
+        1,
+        0
+      ]
+    },
+    "eastBastion": {
+      "position": [
+        0.49374,
+        0.07867,
+        -0.06636
+      ],
+      "normal": [
+        0,
+        1,
+        0
+      ]
+    },
+    "southBastion": {
+      "position": [
+        0.47251,
+        0.0553,
+        0.17984
+      ],
+      "normal": [
+        0,
+        1,
+        0
+      ]
+    },
+    "frenchBattery": {
+      "position": [
+        -0.61841,
+        0.04128,
+        -0.22342
+      ],
+      "normal": [
+        0,
+        1,
+        0
+      ]
+    },
+    "bridge": {
+      "position": [
+        -0.07252,
+        0.03583,
+        0.23247
+      ],
+      "normal": [
+        0,
+        1,
+        0
+      ]
+    }
+  }
+}
