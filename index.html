@@ -3,27 +3,34 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="color-scheme" content="dark" />
-    <meta name="theme-color" content="#0b2540" />
+    <meta name="color-scheme" content="light" />
+    <meta name="theme-color" content="#f2ebdd" />
     <meta name="description" content="Place a spatial study of Elmina Castle in your surroundings. A browser-based exhibition prototype." />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <title>Elmina</title>
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230b2540'/%3E%3Cpath d='M6 24h20v2H6zM8 14h3v-3h2v3h2v-5h2v5h2v-3h2v3h3v10H8z' fill='%23d9cdb4'/%3E%3C/svg%3E" />
-    <script type="module" crossorigin src="./assets/index-BxVqQCMA.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-DnH9yckx.css">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%232a1c16'/%3E%3Cpath d='M6 24h20v2H6zM8 14h3v-3h2v3h2v-5h2v5h2v-3h2v3h3v10H8z' fill='%23f2ebdd'/%3E%3C/svg%3E" />
+    <script type="module" crossorigin src="./assets/index-DmTI8qEF.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-CPRKCEjy.css">
   </head>
   <body>
     <a class="skip-link" href="#story">Skip to story layers</a>
 
     <div class="page">
-      <header class="masthead">
-        <p class="eyebrow">Exhibition prototype</p>
-        <h1>Elmina</h1>
-        <p class="subtitle">Place a spatial study of Elmina Castle in your surroundings.</p>
+      <header class="bar">
+        <p class="label">Exhibition prototype</p>
+        <p class="label bar__meta">Elmina, Ghana · Gulf of Guinea</p>
+        <button type="button" class="text-button" id="ack-open" aria-haspopup="dialog" aria-controls="acknowledgement-panel">
+          Acknowledgement
+        </button>
       </header>
 
       <main class="layout">
-        <section class="stage" aria-label="Interactive 3D view of the spatial study">
+        <div class="intro">
+          <h1>Elmina</h1>
+          <p class="subtitle">Place a spatial study of Elmina Castle in your surroundings.</p>
+        </div>
+
+        <section class="stage" aria-label="Interactive 3D view of the reconstruction">
           <model-viewer
             id="elmina-viewer"
             alt="Interpretive 3D reconstruction of Elmina Castle on its rocky shoreline: the Great Court and Inner Court ringed by white ranges and towers with terracotta roofs, bastions at the seaward end, the Service Yard, and two ditches crossed by a bridge on the landward side."
@@ -37,20 +44,20 @@
             interaction-prompt="none"
             loading="eager"
             reveal="auto"
-            camera-orbit="-28deg 58deg 72%"
+            camera-orbit="-28deg 62deg 96%"
             min-camera-orbit="auto 8deg auto"
             max-camera-orbit="auto 86deg auto"
             interpolation-decay="160"
             environment-image="neutral"
-            exposure="0.95"
-            shadow-intensity="0.85"
+            exposure="0.9"
+            shadow-intensity="0.7"
             shadow-softness="0.9"
           >
             <!-- Suppress model-viewer's default AR button; the page provides its own labelled button. -->
             <span slot="ar-button" hidden></span>
 
             <div slot="poster" class="viewer-poster" aria-hidden="true">
-              <span>Preparing the spatial study…</span>
+              <span>Preparing the model</span>
             </div>
 
             <div slot="progress-bar" class="viewer-progress" aria-hidden="true"><span></span></div>
@@ -66,7 +73,7 @@
                 <button type="button" class="ar-story__close" id="ar-story-close">Close</button>
               </article>
 
-              <div class="ar-bar interactive">
+              <div class="ar-bar">
                 <div class="ar-layers" id="ar-layers" role="group" aria-label="Story layers"></div>
                 <button type="button" class="ar-action" id="ar-reset" hidden>Reset placement</button>
               </div>
@@ -77,67 +84,58 @@
             </button>
           </model-viewer>
 
-          <p class="model-status" id="model-status">Interpretive reconstruction based on authorised reference material</p>
-
-          <div class="viewer-tools">
-            <p class="viewer-hint">Drag to orbit · scroll or pinch to zoom</p>
-            <div class="viewer-tools__buttons">
-              <button type="button" class="btn-quiet" id="reset-view">Reset view</button>
-              <button type="button" class="btn-quiet" id="reset-scale">Reset scale</button>
-            </div>
-          </div>
-
           <p class="viewer-fallback" id="viewer-fallback" hidden>
             The 3D view could not be shown on this device. The story layers and sources remain available on this page.
           </p>
+
+          <div class="stage__foot">
+            <p class="caption" id="model-status">Interpretive reconstruction based on authorised reference material</p>
+            <div class="stage__tools">
+              <span class="viewer-hint">Drag to orbit · scroll or pinch to zoom</span>
+              <button type="button" class="text-button" id="reset-view">Reset view</button>
+              <button type="button" class="text-button" id="reset-scale">Reset scale</button>
+            </div>
+          </div>
         </section>
 
-        <section class="panel" aria-label="Place and explore">
-          <fieldset class="scale-modes" id="scale-modes">
-            <legend>Starting size</legend>
-            <div class="scale-modes__options" id="scale-options"></div>
-            <p class="scale-modes__hint" id="scale-hint" aria-live="polite"></p>
+        <section class="place" aria-label="Place the model in your space">
+          <fieldset class="sizes" id="scale-modes">
+            <legend class="label">Starting size</legend>
+            <div class="sizes__options" id="scale-options"></div>
+            <p class="sr-only" id="scale-hint" aria-live="polite"></p>
           </fieldset>
 
-          <button type="button" class="btn-primary" id="place-button">Place Elmina in your space</button>
+          <button type="button" class="cta" id="place-button">Place Elmina in your space</button>
           <p class="place-note">On a phone or tablet, scan a clear floor or table, then tap to place.</p>
           <p class="ar-route" id="ar-route" hidden></p>
           <div class="notice" id="ar-message" role="status" aria-live="polite" hidden></div>
+        </section>
 
-          <section class="story" id="story" aria-labelledby="story-heading" tabindex="-1">
-            <h2 id="story-heading">Story layers</h2>
-            <div class="story__buttons" id="story-buttons" role="group" aria-label="Story layers"></div>
-            <article class="story__panel" id="story-panel" aria-live="polite">
-              <h3 class="story__title" id="story-title">Choose a layer</h3>
-              <p class="story__body" id="story-body">
-                Each layer offers a different way of looking at the castle and its coast. Choose one to begin.
-              </p>
-            </article>
-          </section>
+        <section class="story" id="story" aria-labelledby="story-heading" tabindex="-1">
+          <h2 class="label" id="story-heading">Story layers</h2>
+          <ol class="index" id="story-buttons"></ol>
         </section>
       </main>
-
-      <footer class="sources" id="sources">
-        <!-- Sources and acknowledgement, tucked behind one small button. -->
-        <details class="ack" id="acknowledgement-panel">
-          <summary class="ack__button">
-            <span class="ack__label-closed">Acknowledgement</span>
-            <span class="ack__label-open">Hide acknowledgement</span>
-          </summary>
-          <div class="ack__content">
-            <h2 id="sources-heading">Sources &amp; acknowledgement</h2>
-            <p class="sources__ack" id="acknowledgement"></p>
-            <div class="sources__groups" id="source-groups"></div>
-            <h3 class="sources__subhead">Model references: GIS layouts, rendered views, drawings</h3>
-            <p class="sources__note" id="model-reference-note"></p>
-            <div class="sources__groups" id="documentation-groups"></div>
-            <p class="sources__privacy">
-              This page collects no data: no analytics, accounts, sign-in or cookies. AR placement lasts only
-              for the current session; the model is not stored in your space after you leave AR.
-            </p>
-          </div>
-        </details>
-      </footer>
     </div>
+
+    <!-- Sources and acknowledgement open in a side sheet from the small button in the top bar. -->
+    <dialog class="sheet" id="acknowledgement-panel" aria-labelledby="sources-heading">
+      <div class="sheet__head">
+        <p class="label">Acknowledgement</p>
+        <button type="button" class="text-button" id="ack-close">Close</button>
+      </div>
+      <div class="sheet__body" id="sources">
+        <h2 id="sources-heading">Sources &amp; acknowledgement</h2>
+        <p class="sources__ack" id="acknowledgement"></p>
+        <div class="sources__groups" id="source-groups"></div>
+        <h3 class="sources__subhead">Model references: GIS layouts, rendered views, drawings</h3>
+        <p class="sources__note" id="model-reference-note"></p>
+        <div class="sources__groups" id="documentation-groups"></div>
+        <p class="sources__privacy">
+          This page collects no data: no analytics, accounts, sign-in or cookies. AR placement lasts only
+          for the current session; the model is not stored in your space after you leave AR.
+        </p>
+      </div>
+    </dialog>
   </body>
 </html>
