@@ -15,7 +15,13 @@
 # them for an hour and then check.
 /models/*
   Cache-Control: public, max-age=3600
-/models/*.glb
-  Content-Type: model/gltf-binary
+# Cloudflare only compresses the file types on its own list, and 3D models
+# (model/gltf-binary) are not on it: the compact model would be sent at twice
+# the size. Labelling that one file as generic binary data, a type that is on
+# the list, makes Cloudflare compress it. Browsers read it the same way. The
+# plain model keeps its proper type, because Android Scene Viewer fetches it.
+/models/*.web.glb
+  ! Content-Type
+  Content-Type: application/x-protobuf
 /models/*.usdz
   Content-Type: model/vnd.usdz+zip
