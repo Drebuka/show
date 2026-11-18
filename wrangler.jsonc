@@ -1,0 +1,10 @@
+// Cloudflare configuration for this website (a "Worker" that only serves files).
+// The site is plain static files at the top of this repository; nothing is built.
+// "name" must stay the same as the Worker's name in the Cloudflare dashboard.
+{
+  "name": "show",
+  "compatibility_date": "2026-11-18",
+  "assets": {
+    "directory": "./"
+  }
+}
