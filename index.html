@@ -27,10 +27,10 @@
         } catch (error) { /* storage unavailable: leave the page as it is */ }
       }, true);
     </script>
-    <script type="module" crossorigin src="./assets/index-BFKcSTs8.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-BAG4e1gP.css">
+    <script type="module" crossorigin src="./assets/index-CwumCo9J.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-CcYPJspD.css">
     <link rel="modulepreload" crossorigin href="./assets/viewer-Dv68pSpo.js">
-    <link rel="modulepreload" crossorigin href="./assets/experience-BKrfb8-4.js">
+    <link rel="modulepreload" crossorigin href="./assets/experience-D2YQTOuE.js">
   </head>
   <body>
     <a class="skip-link" href="#story">Skip to story layers</a>
@@ -113,9 +113,11 @@
             </button>
           </model-viewer>
 
-          <p class="viewer-fallback" id="viewer-fallback" hidden>
-            The 3D view could not be shown on this device. The story layers and sources remain available on this page.
-          </p>
+          <!-- Shown only if the 3D view fails; says what happened and offers a way back. -->
+          <div class="viewer-fallback" id="viewer-fallback" role="status" hidden>
+            <p id="viewer-fallback-text">The 3D view could not start. The story layers and sources remain available on this page.</p>
+            <button type="button" class="text-button" id="viewer-retry">Try again</button>
+          </div>
 
           <div class="stage__foot">
             <div class="stage__tools">
